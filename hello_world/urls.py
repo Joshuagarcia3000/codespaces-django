@@ -21,12 +21,19 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from hello_world.core import views as core_views
+from lists import views
 
 urlpatterns = [
-    path("", core_views.index),
+    # path("", core_views.index),
     path("admin/", admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
+    path("", views.list_lists, name='list_lists'),
+    #path('create_list/', views.create_list, name='create_list'),
+    path('list/<int:list_id>/', views.list_detail, name='list_detail'),
+    path('list/<int:list_id>/add_item/', views.add_item, name='add_item'),
+    path('item/<int:item_id>/vote/', views.vote_item, name='vote_item'),
 ]
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

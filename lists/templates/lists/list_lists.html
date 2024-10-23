@@ -1,0 +1,5 @@
+<h1>Available Lists</h1>
+<ul>
+    {% for list in lists %}
+        <li><a href="{% url 'lists:detail' list.id %}">{{ list.name }}</a></li>
+    {% endfor %}
